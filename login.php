@@ -26,10 +26,11 @@ if (isset($_POST['userid']) && isset($_POST['password'])) {
 <html>
 <head>
 <title>zenkim</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
     <?php
-        if ($notification) {
+        if (isset($notification)) {
           echo "<p>" . $notification . "</p>";
         }
     ?>
