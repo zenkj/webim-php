@@ -67,7 +67,7 @@ $result = mysql_query("select * from webim_users where id = $userid");
 if (!$result || mysql_num_rows($result) != 1) {
     setcookie(session_name(), '');
     session_destroy();
-    redirect("/webim-php/login.php");
+    redirect("./login.php");
 }
 
 $array = mysql_fetch_array($result);
@@ -309,7 +309,7 @@ $(document).ready(function() {
 </head>
 <body>
 <div id="header">
-<a id="logout" href="/webim-php/logout.php">logout</a>
+<a id="logout" href="./logout.php">logout</a>
 <p id="friend_status" class="inactive"></p>
 <hr />
 </div>

@@ -3,7 +3,7 @@ require('./util.php');
 session_start();
 
 if (isset($_SESSION['userid'])) {
-    redirect("/webim-php/index.php");
+    redirect("./index.php");
 }
 
 if (isset($_POST['userid']) && isset($_POST['password'])) {
@@ -17,7 +17,7 @@ if (isset($_POST['userid']) && isset($_POST['password'])) {
             $notification = "invalid userid or password";
         } else {
             $_SESSION['userid'] = $_POST['userid'];
-            redirect("/webim-php/index.php");
+            redirect("./index.php");
         }
     }
 }
@@ -34,7 +34,7 @@ if (isset($_POST['userid']) && isset($_POST['password'])) {
           echo "<p>" . $notification . "</p>";
         }
     ?>
-    <form action="/webim-php/login.php" method="POST">
+    <form action="./login.php" method="POST">
     <table>
         <tr><td>id</td><td><input type="text" name="userid" /></td></tr>
         <tr><td>password</td><td><input type="password" name="password" /></td></tr>
