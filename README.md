@@ -13,6 +13,12 @@ If no friends are online, the polling interval will be much longer(15s) than the
 To support mobile device, add this to all page:
     <meta name="viewport" content="width=device-width, inital-scale=1">
 
+##Snapshot
+###Chrome snapshot on PC
+![Chrome snapshot on PC](snapshot/chrome.png)
+###Android snapshot on Mobile Phone
+![Android snapshot on Mobile Phone](snapshot/android.png)
+
 ##Issue
 In some mobile browser(e.g. UCWeb), browser timer seems not work. One refresh button is added
 to refresh new messages manually.
