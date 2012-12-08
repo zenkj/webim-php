@@ -281,7 +281,7 @@ $(document).ready(function() {
                     if (data.friendstatus == 'active')
                         timerID = setTimeout(daemon, 3000);
                     else
-                        timerID = setTimeout(daemon, 8000);
+                        timerID = setTimeout(daemon, 15000);
                 },
                 function(xhr, err) {
                     alert("update information failed, please relogin");
