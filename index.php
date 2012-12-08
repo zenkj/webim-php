@@ -151,6 +151,29 @@ $(document).ready(function() {
     var userid = <?php echo $userid; ?>;
     var username = <?php echo "'$username'"; ?>;
 
+    $('#my_status').text(username);
+
+    function activeFriend(active) {
+        if (active) {
+            $('#friend_status').addClass('active').removeClass('inactive');
+        } else {
+            $('#friend_status').addClass('inactive').removeClass('active');
+        }
+    }
+
+    function activeMe(active) {
+        if (active) {
+            $('#my_status').addClass('active').removeClass('inactive');
+        } else {
+            $('#my_status').addClass('inactive').removeClass('active');
+        }
+    }
+
+    function activeAll(active) {
+        activeMe(active);
+        activeFriend(active);
+    }
+
     function request(data, done, fail) {
         var xhr = $.ajax({url: './index.php',
             type: 'POST',
@@ -169,6 +192,7 @@ $(document).ready(function() {
             },
             function(xhr, err) {
                 alert('get friend failed, please relogin');
+                activeAll(false);
                 window.location.assign('./login.php');
             });
 
@@ -192,11 +216,8 @@ $(document).ready(function() {
 
         $('#backlog_container').scrollTop($('#backlog').height());
 
-        if (info.friendstatus == 'active') {
-            $('#friend_status').addClass('active').removeClass('inactive');
-        } else {
-            $('#friend_status').addClass('inactive').removeClass('active');
-        }
+        activeMe(true);
+        activeFriend(info.friendstatus == 'active');
     }
 
     function clearInputBox() {
@@ -211,6 +232,7 @@ $(document).ready(function() {
                     function(result) { updateDisplay(result); },
                     function(xhr, err) {
                         alert("send message failed, please relogin");
+                        activeAll(false);
                         window.location.assign('./login.php');
                     });
         }
@@ -227,6 +249,7 @@ $(document).ready(function() {
                 function(result) {updateDisplay(result);},
                 function(xhr, err) {
                     alert("clear messages failed, please relogin: " + err);
+                    activeAll(false);
                     window.location.assign('./login.php');
                 });
     });
@@ -255,13 +278,14 @@ $(document).ready(function() {
         request({request: 'get_info'},
                 function(data) {
                     updateDisplay(data);
-                    if (data.friendstatus)
+                    if (data.friendstatus == 'active')
                         timerID = setTimeout(daemon, 3000);
                     else
                         timerID = setTimeout(daemon, 8000);
                 },
                 function(xhr, err) {
                     alert("update information failed, please relogin");
+                    activeAll(false);
                     window.location.assign('./login.php');
                 });
     }
@@ -270,19 +294,27 @@ $(document).ready(function() {
 });
 </script>
 <style type="text/css">
-#friend_status {
-    width: 40px;
-    text-align: center;
-    float: right;
-    margin: 0;
-    padding: 0;
-}
 #logout {
     float: right;
     text-align: center;
     margin: 0;
     padding: 0;
 }
+#friend_status {
+    width: 40px;
+    text-align: center;
+    float: right;
+    margin: 0 10 0 0;
+    padding: 0;
+}
+#my_status {
+    width: 40px;
+    text-align: center;
+    float: right;
+    margin: 0 3 0 0;
+    padding: 0;
+}
+
 #header hr {
     clear: both;
 }
@@ -311,6 +343,7 @@ $(document).ready(function() {
 <div id="header">
 <a id="logout" href="./logout.php">logout</a>
 <p id="friend_status" class="inactive"></p>
+<p id="my_status" class="active"></p>
 <hr />
 </div>
 <div id="backlog_container">
