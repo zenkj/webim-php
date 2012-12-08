@@ -2,4 +2,5 @@
 * auto scroll in mobile browser
 * https support
 * beautify message display                              _done_
-* desplay number type input method for password         
+* desplay number type input method for id               _cancel_         
+* handle multi-friends
