@@ -201,7 +201,7 @@ $(document).ready(function() {
             return username;
         if (uid == currentfid)
             return currentfname;
-        return uid;
+        return '' + uid + ' ' + userid + ' ' + currentfid;
     }
 
     function updateDisplay(info) {
@@ -214,9 +214,8 @@ $(document).ready(function() {
                 var t = '' + tobj.getHours() + ':' + tobj.getMinutes() + ':' + tobj.getSeconds();
                 var d = '' + tobj.getFullYear() + '-' + (tobj.getMonth()+1) + '-' + tobj.getDate();
                 var userclass = isme ? 'isme' : 'isfriend';
-                var userstyle = isme ? 'text-align: right;' : 'text-align: left;';
                 var str = '<div class="' + userclass + '">'
-                    + '<p><span class="username">' + userName(msg.fromid) + '</span>&nbsp;'
+                    + '<p class="meta"><span class="username">' + userName(msg.fromid) + '</span>&nbsp;'
                     + '<span class="time">' + t + '</span>&nbsp;'
                     + '<span class="date">' + d + '</span></p>'
                     + '<p class="content">' + msg.content + '</p></div>';
@@ -304,6 +303,9 @@ $(document).ready(function() {
 });
 </script>
 <style type="text/css">
+body {
+    background-color: #DDDCD6;
+}
 #logout {
     float: right;
     text-align: center;
@@ -340,6 +342,7 @@ $(document).ready(function() {
     height: 80%;
     position: relative;
     overflow: scroll;
+    border: 1px solid #B5B5B5;
 }
 #backlog {
     width: 100%;
@@ -368,9 +371,18 @@ $(document).ready(function() {
     color: #7E7E79;
 }
 
-#backlog .content {
+#backlog p.meta {
+    margin: 0;
+    border: 0;
+    padding: 8 4 0 4;
+}
+
+#backlog p.content {
     color: #2F2F2F;
     font-weight: bold;
+    margin: 0;
+    border: 0;
+    padding: 0 4 8 4;
 }
 </style>
 </head>
