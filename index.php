@@ -333,7 +333,7 @@ $(document).ready(function() {
 }
 
 .inactive {
-    background-color: gray;
+    background-color: #6D6C67;
 }
 
 #backlog_container {
@@ -357,6 +357,7 @@ $(document).ready(function() {
 }
 #backlog .username {
     font-weight: bold;
+    color: #A32918;
 }
 
 #backlog .time {
@@ -364,11 +365,11 @@ $(document).ready(function() {
 }
 
 #backlog .date {
-    color: #AAA;
+    color: #7E7E79;
 }
 
 #backlog .content {
-    color: #00F;
+    color: #2F2F2F;
     font-weight: bold;
 }
 </style>
