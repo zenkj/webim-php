@@ -209,7 +209,17 @@ $(document).ready(function() {
         if (info.msgs) {
             for (var i in info.msgs) {
                 var msg = info.msgs[i];
-                var str = '<div><p>[' + userName(msg.fromid) + ']&nbsp;' + msg.time + '</p><p>' + msg.content + '</p></div>';
+                var isme = msg.fromid == userid;
+                var tobj = new Date(msg.time);
+                var t = '' + tobj.getHours() + ':' + tobj.getMinutes() + ':' + tobj.getSeconds();
+                var d = '' + tobj.getFullYear() + '-' + (tobj.getMonth()+1) + '-' + tobj.getDate();
+                var userclass = isme ? 'isme' : 'isfriend';
+                var userstyle = isme ? 'text-align: right;' : 'text-align: left;';
+                var str = '<div class="' + userclass + '">'
+                    + '<p><span class="username">' + userName(msg.fromid) + '</span>&nbsp;'
+                    + '<span class="time">' + t + '</span>&nbsp;'
+                    + '<span class="date">' + d + '</span></p>'
+                    + '<p class="content">' + msg.content + '</p></div>';
                 $(str).appendTo($('#backlog'));
             }
         }
@@ -336,6 +346,30 @@ $(document).ready(function() {
     position: absolute;
     top: 0px;
     left: 0px;
+}
+#backlog .isme {
+    text-align: right;
+    background-color: #FFE;
+}
+#backlog .isfriend {
+    text-align: left;
+    background-color: #EFF;
+}
+#backlog .username {
+    font-weight: bold;
+}
+
+#backlog .time {
+    /*text-decoration: underline;*/
+}
+
+#backlog .date {
+    color: #AAA;
+}
+
+#backlog .content {
+    color: #00F;
+    font-weight: bold;
 }
 </style>
 </head>
