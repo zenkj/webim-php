@@ -347,7 +347,7 @@ body {
     height: 80%;
     position: relative;
     overflow: scroll;
-    border: 1px solid #B5B5B5;
+    border: 1px solid #858585;
 }
 #backlog {
     width: 100%;
