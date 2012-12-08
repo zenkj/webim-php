@@ -184,24 +184,12 @@ $(document).ready(function() {
         if (fail) xhr.fail(fail);
     }
 
-    request({request: 'get_friend'},
-            function(data) {
-                currentfid = data.userid;
-                currentfname = data.username;
-                $('#friend_status').text(currentfname);
-            },
-            function(xhr, err) {
-                alert('get friend failed, please relogin');
-                activeAll(false);
-                window.location.assign('./login.php');
-            });
-
     function userName(uid) {
         if (uid == userid)
             return username;
         if (uid == currentfid)
             return currentfname;
-        return '' + uid + ' ' + userid + ' ' + currentfid;
+        return '#' + uid;
     }
 
     function updateDisplay(info) {
@@ -279,27 +267,44 @@ $(document).ready(function() {
         }
     });
 
-    request({request: 'get_all_info'},
-        function(data) { updateDisplay(data); });
+    function start_daemon() {
+        var timerID;
+        function daemon() {
+            request({request: 'get_info'},
+                    function(data) {
+                        updateDisplay(data);
+                        if (data.friendstatus == 'active')
+                            timerID = setTimeout(daemon, 3000);
+                        else
+                            timerID = setTimeout(daemon, 15000);
+                    },
+                    function(xhr, err) {
+                        alert("update information failed, please relogin");
+                        activeAll(false);
+                        window.location.assign('./login.php');
+                    });
+        }
 
-    var timerID;
-    function daemon() {
-        request({request: 'get_info'},
-                function(data) {
-                    updateDisplay(data);
-                    if (data.friendstatus == 'active')
-                        timerID = setTimeout(daemon, 3000);
-                    else
-                        timerID = setTimeout(daemon, 15000);
-                },
-                function(xhr, err) {
-                    alert("update information failed, please relogin");
-                    activeAll(false);
-                    window.location.assign('./login.php');
-                });
+        request({request: 'get_all_info'}, function(data) { updateDisplay(data); });
+
+        timerID = setTimeout(daemon, 3000);
     }
 
-    daemon();
+    request({request: 'get_friend'},
+            function(data) {
+                currentfid = data.userid;
+                currentfname = data.username;
+                $('#friend_status').text(currentfname);
+
+                // only start daemon after obtaining friend info
+                start_daemon();
+            },
+            function(xhr, err) {
+                alert('get friend failed, please relogin');
+                activeAll(false);
+                window.location.assign('./login.php');
+            });
+
 });
 </script>
 <style type="text/css">
