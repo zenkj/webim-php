@@ -15,9 +15,9 @@ To support mobile device, add this to all page:
 
 ##Snapshot
 ###Chrome snapshot on PC
-![Chrome snapshot on PC](https://github.com/zenkj/webim-php/blob/master/snapshot/chrome.png)
+![Chrome snapshot on PC](https://raw.github.com/zenkj/webim-php/blob/master/snapshot/chrome.png)
 ###Android snapshot on Mobile Phone
-![Android snapshot on Mobile Phone](https://github.com/zenkj/webim-php/blob/master/snapshot/android.png)
+![Android snapshot on Mobile Phone](https://raw.github.com/zenkj/webim-php/blob/master/snapshot/android.png)
 
 ##Issue
 In some mobile browser(e.g. UCWeb), browser timer seems not work. One refresh button is added
